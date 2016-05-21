@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>XMLHttpRequest синхронный запрос</title>
+	<script>
+		window.onload = function() {
+			document.getElementById("btnGet").onclick = function () {
+				// Создание объекта для Http-запроса
+				var xhr = new XMLHttpRequest(); 
+
+				// Настройка объекта для отправки синхронного GET запроса
+				xhr.open("GET", "testfile.html", false); 
+
+				// Отправка запроса, так как запрос является синхронным, следующая строка кода выполнится только после получения ответа со стороны сервера.
+				xhr.send();
+
+				// responseText - ответ, полученный от сервера.
+				document.getElementById("output").innerHTML += xhr.responseText;
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" id="btnGet" value="Get Info"/>
+	<p id="output"></p>
+</body>
+</html>
