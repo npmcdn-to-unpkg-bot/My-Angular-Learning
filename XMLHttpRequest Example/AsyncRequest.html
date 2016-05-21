@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>XMLHttpRequest асинхронный запрос</title>
+	<script src="jquery-2.1.4.min.js"></script>
+	<script>
+		window.onload = function() {
+			document.getElementById("btnGet").onclick = function () {
+				// Создание объекта для Http-запроса
+				var xhr = new XMLHttpRequest(); 
+
+				// Настройка объекта для отправки синхронного GET запроса
+				xhr.open("GET", "http://elionsea.zzz.com.ua/textfile.txt", true); 
+
+				// функция-обработчик срабатывает при изменении свойства readyState
+				// Значения свойства readyState:
+				// 0 - Метод open() ещё не вызывался
+				// 1 - Метод open() уже был вызван, но метод send() ещё не вызывался
+				// 2 - Метод send() был вызван, но ответ от сервера ещё не получен
+				// 3 - Идёт приём данных от сервера. Для значения 3 Firefox вызывает обработчик события несколько раз, IE только один раз.
+				// 4 - Ответ от сервера полностью получен (Запрос успешно завершён).
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4) { // если получен ответ
+						if(xhr.status == 200) { // и если статус код ответа 200
+							document.getElementById("output").innerHTML += xhr.responseText;
+						}
+					}
+				}
+
+				// Отправка запроса, так как запрос является синхронным, следующая строка кода выполнится только после получения ответа со стороны сервера.
+				xhr.send();
+				
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" id="btnGet" value="Get Info"/>
+	<p id="output"></p>
+</body>
+</html>
+
+
